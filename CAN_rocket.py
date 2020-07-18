@@ -1,3 +1,6 @@
+### File used to send and receive custom data in a fast manner on the CAN bus
+### Can be used to simulate the Kalman angle on the 
+
 from PCANBasic import *
 # The Plug & Play Channel (PCAN-USB) is initialized
 #
@@ -7,6 +10,7 @@ if result != PCAN_ERROR_OK:
     # An error occurred, get a text describing the error and show it
     #
     result = objPCAN.GetErrorText(result)
+	print("ERROR: PCAN-USB (Ch-1) could no be initialized \n")
     print(result[1])
 else:
     print("PCAN-USB (Ch-1) was initialized")
@@ -19,7 +23,7 @@ while (readResult[0] & PCAN_ERROR_QRCVEMPTY) != PCAN_ERROR_QRCVEMPTY:
     readResult = objPCAN.Read(PCAN_USBBUS1)
     if readResult[0] != PCAN_ERROR_QRCVEMPTY:
         # Process the received message
-        
+		
         print("A message was received")
         print("Method code", readResult[0])
         print("ID", readResult[1].getID())
@@ -44,3 +48,7 @@ if result != PCAN_ERROR_OK:
     print(result[1])
 else:
     print("PCAN-USB (Ch-1) was released")
+	
+
+def processFrame():
+	
